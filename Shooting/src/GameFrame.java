@@ -63,9 +63,12 @@ public class GameFrame extends MyFrame {
 				Enemy e = GameWorld.enemies.get(j);
 
 				// 敵e とプレイヤー弾bが衝突していたら「あたり」を表示
-				if (Math.abs(e.x - b.x) <= 30 && Math.abs(e.y - b.y) <= 30) {
+				if (checkHit(e,b)) {
 					System.out.println("あたり");
 					hits++;
+					e.life--;
+				}
+				if(e.life<=0) {
 					GameWorld.enemies.remove(j);
 				} else {
 					j++;
