@@ -6,6 +6,7 @@ public class GameFrame extends MyFrame {
 		addKeyListener(GameWorld.player);
 		GameWorld.enemies = new Vector<Enemy>();
 		GameWorld.enemies.add(new EnemyBase(100, 50, 1, 0));
+		GameWorld.enterPressed=false;
 		while (true) {
 			clear();
 			GameWorld.player.draw(this);
@@ -17,9 +18,15 @@ public class GameFrame extends MyFrame {
 			if (GameWorld.enemies.size()==0) { //敵が全滅した?
 				setColor(0,0,0);
 				drawString("クリア！",100,200,40);
+				if (GameWorld.enterPressed) { // Enterキーが押された?
+				    break;
+				}
 			} else if (GameWorld.player.y<0) { //プレイヤーが消えた?
 				setColor(0,0,0);
 				drawString("ゲームオーバー！",50,200,40);
+				if (GameWorld.enterPressed) { // Enterキーが押された?
+					break;
+				}
 			}
 
 			sleep(0.03);
